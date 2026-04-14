@@ -1,0 +1,128 @@
+---
+title: "How to Translate fheroes2 into Another Language"
+description: "How to contribute fheroes2 translations using PO files and Poedit. Covers 23 supported languages, testing MO files, and submitting pull requests."
+---
+
+fheroes2 uses portable object (PO) files to handle localization, stored in the `files/lang` subdirectory of the repository. Community members can contribute by editing these files with standard translation tools, then submitting a pull request. This guide covers everything from setting up your environment to submitting polished translation work — on Linux, macOS, and Windows.
+
+## Current translation status
+
+The following languages are currently supported. Each PO file is named after the ISO 639-1 two-character language code (for example, `de.po` for German).
+
+| Language | PO file |
+|---|---|
+| Belarusian | `be.po` |
+| Bulgarian | `bg.po` |
+| Czech | `cs.po` |
+| Danish | `da.po` |
+| Dutch | `nl.po` |
+| Esperanto | `eo.po` |
+| French | `fr.po` |
+| German | `de.po` |
+| Greek | `el.po` |
+| Hungarian | `hu.po` |
+| Italian | `it.po` |
+| Lithuanian | `lt.po` |
+| Norwegian | `nb.po` |
+| Polish | `pl.po` |
+| Brazilian Portuguese | `pt.po` |
+| Romanian | `ro.po` |
+| Russian | `ru.po` |
+| Slovak | `sk.po` |
+| Spanish | `es.po` |
+| Swedish | `sv.po` |
+| Turkish | `tr.po` |
+| Ukrainian | `uk.po` |
+| Vietnamese | `vi.po` |
+
+## Adding a new language
+
+If the language you want to translate into is not yet supported, you need to do three things before editing any PO file:
+
+1. Add the language to the `SupportedLanguage` enum in the source code.
+2. Create a new PO file named with the ISO 639-1 two-character code for the language (for example, `ja.po` for Japanese).
+3. Add the language to the font generation code in `src/fheroes2/gui/ui_font.cpp`, specifying the correct font encoding/charset. If no compatible encoding has been implemented yet, you will need to write that code first.
+
+## Contributing to an existing translation
+
+<Steps>
+  <Step title="Fork the repository">
+    Create your own fork of the fheroes2 repository on GitHub. Your fork is a safe environment to prepare and test changes without affecting the main codebase. See GitHub's guide on [creating a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+
+    Before starting any new batch of work, make sure your fork is up to date with the latest changes from the main repository. See GitHub's guide on [syncing a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork).
+  </Step>
+  <Step title="Install translation software">
+    We recommend [Poedit](https://poedit.net/) or [Gtranslator](https://wiki.gnome.org/Apps/Gtranslator) for editing PO files. All currently implemented languages use a standardized font encoding/charset, so either tool works without additional configuration for existing languages.
+  </Step>
+  <Step title="Create a branch">
+    Create a dedicated branch in your fork for the translation work. See GitHub's guide on [creating a branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository).
+
+    <Tip>
+      Keep each branch focused on one area of the game — for example, creature names or castle buildings. This makes your pull request easier to review and get merged quickly.
+    </Tip>
+  </Step>
+  <Step title="Edit the PO file">
+    Open the PO file for your language from `files/lang/` in Poedit or Gtranslator and add or update translations. All original translatable strings come from the game's source code. For example, the following string can be found and translated in the PO files:
+
+    ```cpp
+    _( "Are you sure you want to quit?" )
+    ```
+
+    If you need context on where a string is used, search for it in the source code.
+  </Step>
+  <Step title="Test your changes">
+    Compile the PO file into a machine object (MO) binary that the fheroes2 engine can read. From the `files/lang` subdirectory, run:
+
+    ```bash
+    make de.mo
+    ```
+
+    Replace `de` with your language code. Then place the resulting MO file in the `files/lang` folder used by your fheroes2 executable. The location varies by platform:
+
+    | Platform | Default location |
+    |---|---|
+    | Windows | App installation directory |
+    | Linux | `/usr/share/fheroes2` or `/usr/local/share/fheroes2` |
+    | macOS | Depends on your package manager |
+    | Flatpak | `usr/.var/app/io.github.ihhub.Fheroes2` |
+
+    On Windows, Poedit can compile the MO file directly. Make sure to set the font encoding/charset to match your language — for example, CP1252 for German or CP1251 for Russian. When you submit the pull request, save the PO file in UTF-8 encoding, as required by GitHub.
+  </Step>
+  <Step title="Commit and open a pull request">
+    When you are satisfied with your work, commit the changes to your branch and open a pull request proposing them to the fheroes2 repository.
+
+    - [How to commit](https://github.com/git-guides/git-commit)
+    - [How to create a pull request from a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
+
+    Give your pull request a clear, human-readable title such as "Update the Slovak translation".
+
+    <Note>
+      The fheroes2 team reviews every pull request manually, so there are limits on how many changes can be included at once:
+
+      - **Maximum 400 modified lines** per pull request for existing translations.
+      - **Maximum 30 modified lines** for the very first pull request adding a brand-new language.
+      - **Minimum 15 changed strings** per pull request. (For languages that are nearly complete, fewer may be accepted.)
+      - **Recommended size is around 100 lines**, all focused on one area of the game.
+
+      Keeping pull requests small and focused makes the review process faster for everyone.
+    </Note>
+  </Step>
+</Steps>
+
+## Updating PO templates and translatable strings
+
+All PO files are automatically updated with new strings after each commit that changes in-game text. If you need to update strings locally, run the following command from `src/dist/fheroes2` to regenerate the portable object template (POT) file:
+
+```bash
+make pot
+```
+
+Windows users will need an environment that supports `make`, such as Windows Subsystem for Linux (WSL), [Cygwin](https://www.cygwin.com/), or [MSYS2](https://www.msys2.org/).
+
+Once the POT file has been created, navigate to `files/lang` and run:
+
+```bash
+make merge
+```
+
+This merges any new strings from the POT file into all existing PO files. Poedit and Gtranslator also have built-in options for merging strings from a POT file.

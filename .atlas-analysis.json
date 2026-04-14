@@ -1,0 +1,96 @@
+{
+  "projectType": "general",
+  "projectName": "fheroes2",
+  "projectDescription": "An open source, multiplatform recreation of the Heroes of Might and Magic II game engine with enhanced gameplay, graphics, and AI.",
+  "theme": "almond",
+  "primaryColor": "#2C4A7A",
+  "lightColor": "#4A6FA5",
+  "darkColor": "#1A2E4A",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": ["introduction", "getting-started/requirements"]
+          },
+          {
+            "group": "Installation",
+            "pages": [
+              "getting-started/install-windows",
+              "getting-started/install-macos",
+              "getting-started/install-linux",
+              "getting-started/install-mobile-handheld"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Gameplay",
+        "groups": [
+          {
+            "group": "Playing the Game",
+            "pages": [
+              "gameplay/overview",
+              "gameplay/improvements",
+              "gameplay/hotkeys",
+              "gameplay/faq"
+            ]
+          },
+          {
+            "group": "Map Editor",
+            "pages": [
+              "gameplay/editor-overview",
+              "gameplay/editor-maps"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Contributing",
+        "groups": [
+          {
+            "group": "Development",
+            "pages": [
+              "contributing/overview",
+              "contributing/building",
+              "contributing/cmake"
+            ]
+          },
+          {
+            "group": "Localization & Assets",
+            "pages": [
+              "contributing/translation",
+              "contributing/graphical-assets"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Full recreation of the HoMM2 game engine written from scratch in C++",
+    "High-resolution graphics support beyond the original game's limitations",
+    "Improved AI with smarter hero and battle decision-making",
+    "Built-in map editor with random map generation",
+    "Multiplatform support: Windows, macOS, Linux, Android, iOS, PS Vita, Nintendo Switch",
+    "20+ language translations via PO/MO localization files",
+    "Numerous UI and gameplay enhancements over the original game",
+    "Active development with frequent releases and community contributions",
+    "Developer tools for extracting and converting original game assets"
+  ],
+  "publicApiSurface": [
+    "fheroes2 binary (main game executable)",
+    "extractor — extracts AGG file contents",
+    "icn2img — converts ICN sprites to PNG/BMP",
+    "pal2img — generates palette image from KB.PAL",
+    "til2img — extracts TIL sprites to PNG/BMP",
+    "82m2wav — converts 82M audio files to WAV",
+    "xmi2midi — converts XMI music files to MIDI",
+    "h2dmgr — manages H2D data file contents",
+    "bin2txt — extracts data from monster animation files",
+    "extract_homm2_resources.sh — extracts game resources from original HoMM2 installation",
+    "download_demo_version.sh — downloads the free HoMM2 demo version"
+  ]
+}

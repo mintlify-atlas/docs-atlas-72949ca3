@@ -1,0 +1,103 @@
+---
+title: "Install fheroes2 on Windows: Installer and ZIP Archive"
+description: "Install fheroes2 on Windows using the installer or a ZIP archive, then extract game resources from your original HoMM2 copy or the free demo."
+---
+
+fheroes2 on Windows is available as a guided installer (recommended for most users) or as a self-contained ZIP archive. Both options ship with scripts to extract resources from your original Heroes of Might and Magic II installation or to download the free demo version. You need either a legally purchased copy of the original game or the demo to play.
+
+<Info>
+  fheroes2 requires data files from the original **Heroes of Might and Magic II**. Purchase the game on [GOG](https://www.gog.com) or [Ubisoft Store](https://store.ubi.com), or use the bundled demo download script.
+</Info>
+
+## Windows installer
+
+The installer walks you through every step, including extracting game resources during setup.
+
+<Tabs>
+  <Tab title="64-bit (x64)">
+    <Steps>
+      <Step title="Download the installer">
+        Download [fheroes2_windows_x64_SDL2_installer.exe](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_windows_x64_SDL2_installer.exe) from the latest release.
+      </Step>
+      <Step title="Run the installer">
+        Launch the downloaded `.exe` and follow the on-screen instructions.
+      </Step>
+      <Step title="Extract game resources">
+        During installation you will be prompted to either:
+        - **Extract resources from your existing HoMM2 installation** — choose this if you already own the game.
+        - **Download the demo version** — choose this to get the free demo automatically.
+
+        You can also do this later by running the **Extract game resources from the original distribution of HoMM2** shortcut in the fheroes2 group in the Windows Start menu.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="32-bit (x86)">
+    <Steps>
+      <Step title="Download the installer">
+        Download [fheroes2_windows_x86_SDL2_installer.exe](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_windows_x86_SDL2_installer.exe) from the latest release.
+      </Step>
+      <Step title="Run the installer">
+        Launch the downloaded `.exe` and follow the on-screen instructions.
+      </Step>
+      <Step title="Extract game resources">
+        During installation you will be prompted to either:
+        - **Extract resources from your existing HoMM2 installation** — choose this if you already own the game.
+        - **Download the demo version** — choose this to get the free demo automatically.
+
+        You can also do this later by running the **Extract game resources from the original distribution of HoMM2** shortcut in the fheroes2 group in the Windows Start menu.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Windows ZIP archive
+
+Use the ZIP archive if you prefer a portable installation without a setup wizard.
+
+<Tabs>
+  <Tab title="64-bit (x64)">
+    <Steps>
+      <Step title="Download the ZIP archive">
+        Download [fheroes2_windows_x64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_windows_x64_SDL2.zip) from the latest release.
+      </Step>
+      <Step title="Extract the archive">
+        Extract the ZIP to a directory of your choice.
+      </Step>
+      <Step title="Add game resources">
+        Run the appropriate script from the extracted directory:
+
+        - **Own the original game** — run `extract_homm2_resources.bat`. The script searches for an existing HoMM2 installation automatically; if it cannot find one, it will ask you to enter the path manually.
+        - **No original game** — run `download_demo_version.bat` to download and install the free demo.
+
+        Alternatively, copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories (some may be absent depending on your version) from the original game directory into the fheroes2 directory.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="32-bit (x86)">
+    <Steps>
+      <Step title="Download the ZIP archive">
+        Download [fheroes2_windows_x86_SDL2.zip](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_windows_x86_SDL2.zip) from the latest release.
+      </Step>
+      <Step title="Extract the archive">
+        Extract the ZIP to a directory of your choice.
+      </Step>
+      <Step title="Add game resources">
+        Run the appropriate script from the extracted directory:
+
+        - **Own the original game** — run `extract_homm2_resources.bat`. The script searches for an existing HoMM2 installation automatically; if it cannot find one, it will ask you to enter the path manually.
+        - **No original game** — run `download_demo_version.bat` to download and install the free demo.
+
+        Alternatively, copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories (some may be absent depending on your version) from the original game directory into the fheroes2 directory.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Troubleshooting: missing Visual C++ DLLs
+
+If fheroes2 reports missing DLLs on startup, install the Microsoft Visual C++ redistributable package that matches your build:
+
+| Build | Download |
+| --- | --- |
+| 64-bit x64 | [vc_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe) |
+| 32-bit x86 | [vc_redist.x86.exe](https://aka.ms/vs/17/release/vc_redist.x86.exe) |

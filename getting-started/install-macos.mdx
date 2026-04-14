@@ -1,0 +1,125 @@
+---
+title: "Install fheroes2 on macOS via Homebrew, Ports, or ZIP"
+description: "Install fheroes2 on macOS via Homebrew, MacPorts, a ZIP archive, or a native app bundle, then gather HoMM2 game resources to start playing."
+---
+
+fheroes2 offers several installation paths on macOS. Homebrew and MacPorts are the simplest options and handle dependencies automatically. A prebuilt ZIP archive is also available for x86-64 machines. Apple Silicon users should use Homebrew or MacPorts, or build from source. After installing the binary, you need to supply game resources from a purchased copy of Heroes of Might and Magic II or the free demo.
+
+<Info>
+  fheroes2 requires data files from the original **Heroes of Might and Magic II**. Purchase the game on [GOG](https://www.gog.com) or [Ubisoft Store](https://store.ubi.com), or use the bundled demo download script.
+</Info>
+
+## Installation methods
+
+<Tabs>
+  <Tab title="Homebrew">
+    <Steps>
+      <Step title="Install fheroes2">
+        Run the following command in your terminal:
+
+        ```sh
+        brew install fheroes2
+        ```
+      </Step>
+      <Step title="Gather game resources">
+        Follow the [Gathering game resources](#gathering-game-resources) section below.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="MacPorts">
+    <Steps>
+      <Step title="Install fheroes2">
+        Run the following command in your terminal:
+
+        ```sh
+        port install fheroes2
+        ```
+
+        Follow the instructions printed to the screen after installation completes.
+      </Step>
+      <Step title="Gather game resources">
+        Follow the [Gathering game resources](#gathering-game-resources) section below.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="ZIP archive">
+    <Warning>
+      The macOS ZIP archive provides x86-64 binaries only. If you have an Apple Silicon Mac (M1 or later), use Homebrew or MacPorts instead, or [build the project from source](https://github.com/ihhub/fheroes2/blob/master/docs/DEVELOPMENT.md).
+    </Warning>
+
+    <Steps>
+      <Step title="Download the ZIP archive">
+        Download [fheroes2_macos_x86-64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_macos_x86-64_SDL2.zip) from the latest release.
+      </Step>
+      <Step title="Extract the archive">
+        Extract the ZIP to a directory of your choice.
+      </Step>
+      <Step title="Install SDL libraries">
+        From inside the extracted directory, run `brew bundle` from the `script/macos` subdirectory to install the required SDL libraries:
+
+        ```sh
+        brew bundle --file script/macos/Brewfile
+        ```
+      </Step>
+      <Step title="Gather game resources">
+        Follow the [Gathering game resources](#gathering-game-resources) section below.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Native app bundle">
+    <Steps>
+      <Step title="Install dependencies">
+        Install the required dependencies using the provided Brewfile:
+
+        ```sh
+        brew bundle --file script/macos/Brewfile.app_bundle
+        ```
+      </Step>
+      <Step title="Build the app bundle">
+        Download the source and compile with the app bundle option:
+
+        ```sh
+        make FHEROES2_MACOS_APP_BUNDLE=ON
+        ```
+      </Step>
+      <Step title="Gather game resources">
+        Follow the [Gathering game resources](#gathering-game-resources) section below.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Gathering game resources
+
+Once fheroes2 is installed, supply game resources from your original HoMM2 copy or the free demo.
+
+### Extract from the original game
+
+If you have a legally purchased copy of Heroes of Might and Magic II, run the extract resources script for your installation method:
+
+| Installation method | Script to run |
+| --- | --- |
+| Homebrew or MacPorts | `fheroes2-extract-resources` |
+| Native app bundle (built from source) | `script/homm2/extract_homm2_resources_for_app_bundle.sh` |
+| All other cases (ZIP archive, etc.) | `script/homm2/extract_homm2_resources.sh` |
+
+<Tip>
+  If you have the GOG version (a self-extracting Windows `.exe`), use [`innoextract`](https://constexpr.org/innoextract/) to unpack the files without Wine or Windows emulation.
+</Tip>
+
+Alternatively, manually copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories (some may be absent depending on your version) to the correct destination:
+
+| Installation method | Destination directory |
+| --- | --- |
+| Native app bundle (built from source) | `~/Library/Application Support/fheroes2` |
+| All other cases | `~/.fheroes2` |
+
+### Download the demo version
+
+If you do not own the original game, download the free demo using the script for your installation method:
+
+| Installation method | Script to run |
+| --- | --- |
+| Homebrew or MacPorts | `fheroes2-install-demo` |
+| Native app bundle (built from source) | `script/demo/download_demo_version_for_app_bundle.sh` |
+| All other cases (ZIP archive, etc.) | `script/demo/download_demo_version.sh` |

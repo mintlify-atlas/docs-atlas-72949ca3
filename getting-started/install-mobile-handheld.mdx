@@ -1,0 +1,190 @@
+---
+title: "Install fheroes2 on Android and handheld devices"
+description: "Install fheroes2 on Android via Google Play or APK, and on PlayStation Vita or Nintendo Switch using custom firmware homebrew packages."
+---
+
+fheroes2 runs on Android phones and tablets as well as two handheld consoles — PlayStation Vita and Nintendo Switch. The Android version is available through Google Play for a straightforward install. The PS Vita and Nintendo Switch versions are homebrew applications and require custom firmware on the device.
+
+<Info>
+  All platforms require data files from the original **Heroes of Might and Magic II**. If you do not own the game, you can use the free demo version — see the platform-specific instructions below.
+</Info>
+
+<Tabs>
+  <Tab title="Android">
+    ## Installation
+
+    <Steps>
+      <Step title="Install fheroes2">
+        Install the app from [Google Play](https://play.google.com/store/apps/details?id=org.fheroes2), or download the [Android ZIP archive](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_android.zip) and sideload the APK.
+
+        <Note>
+          To install the APK manually, you need to enable installation from unknown sources in your Android device settings.
+        </Note>
+      </Step>
+      <Step title="Prepare game resources">
+        fheroes2 requires the data files from the original Heroes of Might and Magic II. You have two options:
+
+        **Free demo version**
+
+        Download the demo archive from [archive.org](https://archive.org/download/HeroesofMightandMagicIITheSuccessionWars_1020/h2demo.zip) and copy it to your Android device.
+
+        **Full game**
+
+        Create a ZIP archive containing the `ANIM`, `DATA`, `MAPS`, and `MUSIC` directories from your HoMM2 installation and copy the archive to your Android device.
+
+        Notes on specific content:
+        - **Music**: Depending on your version, music files may be on your original CD or in the installation folder (GOG and Ubisoft versions).
+        - **Cinematics**: In-game cinematics require `*.SMK` files in the `ANIM` folder. These can be found on the CD, disc image, or in a folder named `anim` in your HoMM2 installation directory.
+      </Step>
+      <Step title="Extract assets with fh2 Toolset">
+        Open the **fh2 Toolset** app, press **Extract HoMM2 assets**, and select the ZIP archive you copied to the device (either the demo ZIP or your custom archive). The toolset will extract all assets to the correct location.
+      </Step>
+    </Steps>
+
+    ## Touch controls
+
+    The Android version uses touch gestures to replicate mouse input.
+
+    **Right-click (info)**
+
+    Touch and hold the item you want to inspect, then touch anywhere else on the screen with a second finger. You can then lift the first finger and continue viewing the information.
+
+    **Adventure map scrolling**
+
+    Border scrolling is disabled by default. To pan the map, press anywhere on the adventure map and slide your finger to move the view.
+
+    **Combat actions**
+
+    Combat actions require two touches to confirm:
+
+    1. The **first touch** places the cursor and displays a preview of the action — the cells to move to, the angle and cells of an attack, the spell and affected cells, potential damage, and so on.
+    2. The **second touch** confirms and performs the action, but only if it exactly matches what the first touch previewed.
+
+    To select an attack angle more easily, swipe from the cell you intend to attack from to the cell occupied by the enemy unit. Remove your finger, verify the planned attack, then touch the target cell again to confirm.
+
+    ## Android-specific notes
+
+    - Fullscreen mode is enabled by default. To show the info bar with the clock, disable fullscreen in **Main menu → Settings → Graphics**.
+    - The minimum supported Android version is **5.1**.
+  </Tab>
+
+  <Tab title="PlayStation Vita">
+    <Warning>
+      The PlayStation Vita port is a homebrew application. **You must be running custom firmware** on your Vita for it to work.
+    </Warning>
+
+    ## Installation
+
+    <Steps>
+      <Step title="Download the package">
+        Download [fheroes2_psv.zip](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_psv.zip) from the latest release and extract it.
+      </Step>
+      <Step title="Install the VPK">
+        Install `fheroes2.vpk` to your Vita using your preferred homebrew installer (e.g. VitaShell).
+      </Step>
+      <Step title="Copy game data">
+        Copy the following files from your original HoMM2 installation to your Vita:
+
+        | Files | Destination on Vita |
+        | --- | --- |
+        | `HEROES2.AGG` (and `HEROES2X.AGG` if you own Price of Loyalty) from the `DATA` folder | `ux0:data/fheroes2/data/` |
+        | All files from the `MAPS` folder | `ux0:data/fheroes2/maps/` |
+        | Music files in OGG format (from the GOG release) | `ux0:data/fheroes2/music/` |
+        | All `*.SMK` files for in-game cinematics | `ux0:data/fheroes2/heroes2/anim/` |
+      </Step>
+      <Step title="Install suspend/resume plugin (optional)">
+        For proper suspend and resume support, install either [rePatch reDux0](https://github.com/dots-tb/rePatch-reDux0) or [FdFix](https://github.com/TheOfficialFloW/FdFix). Use only one at a time.
+      </Step>
+    </Steps>
+
+    ## Controls
+
+    | Input | Action |
+    | --- | --- |
+    | Left analog stick | Pointer movement |
+    | Right analog stick | Map scrolling |
+    | × | Left mouse button |
+    | ○ | Right mouse button |
+    | □ | End turn |
+    | △ | Open spellbook |
+    | D-Pad left | Next hero |
+    | D-Pad right | Next castle |
+    | D-Pad down | Re-visit object hero stands on |
+    | R1 | Cursor acceleration |
+    | SELECT | System menu |
+    | START | Enter |
+
+    **Text input** uses the D-Pad:
+
+    | D-Pad direction | Action |
+    | --- | --- |
+    | Left | Remove character |
+    | Right | Add new character |
+    | Down | Next character (alphabetically) |
+    | Up | Previous character |
+    | R1 / L1 | Toggle uppercase / lowercase |
+
+    ## Vita-specific options
+
+    - Pointer speed: set `gamepad_pointer_speed` in `ux0:data/fheroes2/fheroes2.cfg`.
+    - Fullscreen: set `fullscreen = on` to scale to the native Vita resolution (960×544), or `fullscreen = off` to center the game area.
+    - Native resolution: set `videomode = 960x544` in the config file, or select the resolution from the main menu (click the left door).
+  </Tab>
+
+  <Tab title="Nintendo Switch">
+    <Warning>
+      The Nintendo Switch port is a homebrew application. **You must be running custom firmware** on your Switch for it to work.
+    </Warning>
+
+    ## Installation
+
+    <Steps>
+      <Step title="Download the package">
+        Download [fheroes2_switch.zip](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_switch.zip) from the latest release and extract it.
+      </Step>
+      <Step title="Copy files to the SD card">
+        The fheroes2 root directory on the Switch is hardcoded as `/switch/fheroes2`. Copy the following to your SD card:
+
+        ```text
+        switch/
+        └── fheroes2/
+            ├── anim/         ← HoMM2 game data
+            ├── data/         ← HoMM2 game data
+            ├── files/        ← from the fheroes2 release
+            ├── maps/         ← HoMM2 game data
+            ├── music/        ← HoMM2 game data
+            └── fheroes2.nro  ← from the fheroes2 release
+        ```
+
+        <Note>
+          If you have a Russian version from Buka Entertainment, your game data may have an `Anim2` folder instead of `ANIM`. Rename it to `ANIM` before copying.
+        </Note>
+      </Step>
+      <Step title="Launch the game">
+        Open the Homebrew Menu on your Switch and launch `fheroes2.nro`. On first run, the game will auto-detect your game data and offer language selection. English is always available.
+      </Step>
+    </Steps>
+
+    ## Controls
+
+    | Input | Action |
+    | --- | --- |
+    | Touchscreen | Emulates mouse, including dragging |
+    | L-stick | Move mouse cursor |
+    | R-stick / D-pad | Scroll |
+    | A | Left mouse click |
+    | B | Right mouse click |
+    | X | Escape |
+    | Y | Enter |
+    | (+) | Cast spell |
+    | (-) | End turn |
+    | R | Cycle through towns |
+    | L | Cycle through heroes |
+
+    ## Switch-specific notes
+
+    - This build was tested on firmware 12.0.3 with Atmosphère M.19.4 (FAT32).
+    - **exFAT is not recommended.**
+    - USB mice and keyboards connected via an OTG adapter are supported.
+  </Tab>
+</Tabs>

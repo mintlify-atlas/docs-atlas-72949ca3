@@ -1,0 +1,112 @@
+---
+title: "Build fheroes2 with CMake on Linux, macOS, and Windows"
+description: "CMake build instructions for fheroes2 on Linux, macOS, and Windows using vcpkg. Covers configure options including the demo data download flag."
+---
+
+CMake is an alternative build system for fheroes2 that works on Linux, macOS, and Windows. Use it if you prefer a CMake-based workflow over the platform-native toolchain, or if you are integrating fheroes2 into a broader CMake project. The minimum required CMake version is 3.24.
+
+<Note>
+  Before building with CMake, clone the repository and install the platform dependencies described in the [building from source guide](/contributing/building). CMake does not replace those dependency installation steps on Linux and macOS.
+</Note>
+
+<Tabs>
+  <Tab title="Linux and macOS">
+    Install the required system dependencies first by following the Linux or macOS steps in the [building guide](/contributing/building). Then use the commands below.
+
+    <Steps>
+      <Step title="Configure the project">
+        Run `cmake` from the repository root to create a `build` directory and configure the project.
+
+        ```bash
+        cmake -B build
+        ```
+      </Step>
+      <Step title="Build the project">
+        Compile the configured project.
+
+        ```bash
+        cmake --build build
+        ```
+      </Step>
+      <Step title="Locate the executable">
+        After a successful build, the `fheroes2` executable is in the `build` directory.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Windows">
+    Windows builds use Visual Studio 2019 with C++ support and the [vcpkg package manager](https://vcpkg.readthedocs.io/en/latest/) for dependency management.
+
+    <Steps>
+      <Step title="Clone and bootstrap vcpkg">
+        Clone the vcpkg repository and run the bootstrap script. The example below places it in `C:\vcpkg`, but you can use any directory.
+
+        ```bash
+        git clone https://github.com/microsoft/vcpkg.git
+        .\vcpkg\bootstrap-vcpkg.bat
+        ```
+      </Step>
+      <Step title="Install dependencies">
+        Install the required libraries for an x64 build.
+
+        ```bash
+        .\vcpkg\vcpkg --triplet x64-windows install sdl2 sdl2-image sdl2-mixer zlib
+        ```
+      </Step>
+      <Step title="Integrate vcpkg with Visual Studio (optional)">
+        If you are developing in Visual Studio, integrate vcpkg so that it automatically finds the installed libraries. This step requires elevated administrator privileges.
+
+        ```bash
+        .\vcpkg\vcpkg integrate install
+        ```
+      </Step>
+      <Step title="Configure the project">
+        From the fheroes2 repository root, run `cmake` with the vcpkg toolchain file and target triplet.
+
+        ```bash
+        cmake -B build -DCMAKE_TOOLCHAIN_FILE="C:\vcpkg\scripts\buildsystems\vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows
+        ```
+      </Step>
+      <Step title="Build the project">
+        Build in Release configuration.
+
+        ```bash
+        cmake --build build --config Release
+        ```
+      </Step>
+      <Step title="Locate the executable">
+        After a successful build, the `fheroes2.exe` executable is in the `build\Release` directory.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Downloading the HoMM II demo automatically
+
+The CMake build can fetch and install the free Heroes of Might and Magic II demo files for you during configuration. Add `-DGET_HOMM2_DEMO=ON` to your `cmake` configure command:
+
+```bash
+cmake -B build -DGET_HOMM2_DEMO=ON
+```
+
+You can combine this flag with any other configure options. For example, on Windows:
+
+```bash
+cmake -B build -DGET_HOMM2_DEMO=ON -DCMAKE_TOOLCHAIN_FILE="C:\vcpkg\scripts\buildsystems\vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows
+```
+
+<Note>
+  `-DGET_HOMM2_DEMO=ON` is not available when building a macOS app bundle (`-DMACOS_APP_BUNDLE=ON`).
+</Note>
+
+## Additional CMake options
+
+The following options can be passed to the `cmake -B build` configure step:
+
+| Option | Default | Description |
+|---|---|---|
+| `ENABLE_IMAGE` | `OFF` | Enable SDL_image support (requires libpng) |
+| `ENABLE_TOOLS` | `OFF` | Build additional development tools |
+| `MACOS_APP_BUNDLE` | `OFF` | Create a macOS app bundle (macOS only) |
+| `GET_HOMM2_DEMO` | `OFF` | Fetch and install the HoMM II demo data |
+| `USE_SDL_VERSION` | `SDL2` | SDL library version to use |

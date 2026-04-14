@@ -1,0 +1,99 @@
+---
+title: "fheroes2 Map Editor: Create Custom HoMM2 Scenarios"
+description: "fheroes2 includes a built-in map editor for creating HoMM2 maps with terrain painting, object placement, events, and a random map generator."
+---
+
+fheroes2 ships with a full-featured map editor that lets you build custom scenarios for Heroes of Might and Magic II. You can paint terrain, place adventure objects, configure castles and heroes, set win and loss conditions, and add events and rumors — all without leaving the application. Maps you create are saved in the fheroes2 native format (`.fh2m`) and can be loaded and played immediately.
+
+## Accessing the editor
+
+From the main menu, select **Map Editor**. The editor menu presents two options:
+
+- **New Map** — create a blank map from scratch or generate a random map.
+- **Load Map** — open an existing `.fh2m` file from your maps folder.
+
+When creating a new map you first choose whether to start from scratch or use the random map generator, then select a map size. Four sizes are available: **Small**, **Medium**, **Large**, and **Extra Large** (each a square measured in tiles).
+
+## Key capabilities
+
+### Terrain painting
+
+The editor panel provides nine terrain types: Water, Grass, Snow, Swamp, Lava, Desert, Dirt, Wasteland, and Beach. Select a terrain brush and a brush size (small, medium, large, or area-fill), then click or drag across the map to paint tiles. The terrain tool also supports drag-to-draw for fast coverage.
+
+### Landscape and adventure objects
+
+Two separate object palettes let you decorate the map:
+
+- **Landscape objects** — Mountains, Rocks, Trees, Water Objects, and miscellaneous decorative pieces.
+- **Adventure objects** — Artifacts, Dwellings, Mines, Power-ups, Treasures, Water adventure objects, and miscellaneous adventure items.
+
+Click a category in the panel, pick an object from the selection list, then place it on any compatible tile.
+
+### Roads and streams
+
+Dedicated instruments let you draw roads and streams. Roads and streams can be painted tile by tile or by dragging.
+
+### Kingdom objects
+
+The **Kingdom Objects** instrument covers the two most important scenario elements: heroes and towns/castles. Place a hero or a castle on the map and then right-click it to open its configuration dialog.
+
+### Erase tool
+
+The erase instrument lets you remove objects selectively. You can choose which categories to erase — landscape decorations, adventure objects, towns, pickable items, monsters, heroes, roads, or streams — before clicking.
+
+### Random map generator
+
+Choose **Random** from the new-map flow and select a map size to let the engine generate a complete map automatically. Before generation begins, a configuration screen lets you adjust parameters such as water percentage and content distribution. The generator places terrain, decorative objects, roads, free pickup objects, and sets starting heroes and player information.
+
+<Info>
+  If the random map generator cannot produce a valid map with the given parameters it shows a warning and returns you to the menu.
+</Info>
+
+### Map specifications
+
+Open the map specifications dialog at any time from the editor panel (**Specs** button) to configure:
+
+- **Name** and **description** — displayed in the scenario selection screen.
+- **Difficulty** — the starting challenge level for the scenario.
+- **Available players** — which colors are human-playable and which are computer-controlled, as well as player races.
+- **Win condition** — one of: defeat everyone (standard), capture a specific town, kill a specific hero, obtain an artifact, defeat the other alliance, or accumulate enough gold.
+- **Loss condition** — one of: lose everything (standard), lose a specific town, lose a specific hero, or run out of time.
+- **Alliances** — group players into opposing sides for the "defeat the other side" win condition.
+- **Daily events** and **rumors** — accessible via the specs dialog.
+- **Creator notes** — optional contact details for map authors, visible only in the editor.
+
+### Daily events and rumors
+
+**Daily events** fire on a scheduled day (with an optional repeat period) and can award resources to specified players along with a message. The **rumors** system stores a list of text strings that Taverns surface randomly during gameplay, adding flavor and lore to the scenario.
+
+### Language support
+
+Each map has a primary language set in the Map Specifications dialog. A language window lets you configure localized name, description, and creator notes for additional supported languages, allowing a single map file to present translated content depending on the player's game language setting.
+
+### Undo and redo
+
+The editor tracks up to 999 discrete actions. Use the **Undo** and **Redo** buttons in the panel (or their keyboard shortcuts) to step backwards and forwards through your editing history. The undo and redo buttons are enabled or disabled automatically based on available history.
+
+## Bundled maps
+
+fheroes2 includes several maps playable without any original game files:
+
+| File | Map name |
+|------|----------|
+| `4_dimensions.fh2m` | 4 Dimensions |
+| `7_deserts.fh2m` | 7 Deserts |
+| `Apocalypse.fh2m` | Apocalypse |
+| `Eruption.fh2m` | Eruption |
+| `Final_Invasion.fh2m` | Final Invasion |
+| `Good,_Bad,_Magne.fh2m` | Good, Bad, Magne |
+| `Ravenhold.fh2m` | Ravenhold |
+
+These maps are stored in the `maps/` directory of the fheroes2 installation and are a good reference when learning how to use the editor.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Creating and managing maps" icon="map-pin" href="/gameplay/editor-maps">
+    Step-by-step guide for building a map from scratch: terrain, objects, castles, heroes, events, and saving.
+  </Card>
+</CardGroup>

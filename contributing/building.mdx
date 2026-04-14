@@ -1,0 +1,183 @@
+---
+title: "Build fheroes2 from Source on Any Platform"
+description: "Step-by-step build instructions for fheroes2 on Windows, macOS, Linux, Android, and iOS, plus pointers to console and web targets."
+---
+
+Building fheroes2 from source lets you run the latest development code, test changes, and submit pull requests. This guide covers every supported platform. Before you start, clone the repository — all paths and scripts referenced below are relative to the repository root.
+
+<Note>
+  fheroes2 requires original Heroes of Might and Magic II game files at runtime. For development purposes you can use the free demo version. Each platform section below explains how to obtain it.
+</Note>
+
+<Tabs>
+  <Tab title="Windows">
+    <Steps>
+      <Step title="Install dependencies">
+        Go to the `script/windows` directory and run `install_packages.bat`. This script installs all packages required to build with Microsoft Visual Studio.
+
+        ```bash
+        script\windows\install_packages.bat
+        ```
+      </Step>
+      <Step title="Add game data">
+        You have two options:
+
+        **Option A — original game:** Copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories from your Heroes of Might and Magic II installation into the repository root. Some subdirectories may be absent depending on your version of the game.
+
+        **Option B — demo version:** Go to the `script/demo` directory and run `download_demo_version.bat` to download the free demo, which is the minimum required for development.
+
+        ```bash
+        script\demo\download_demo_version.bat
+        ```
+      </Step>
+      <Step title="Build the project">
+        Open `fheroes2-vs2019.vcxproj` (targeted for Visual Studio 2019) and build the project. Visual Studio will automatically copy the game files from the root directory to the build output directory.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="macOS">
+    <Steps>
+      <Step title="Install dependencies">
+        Go to the `script/macos` directory and run `brew bundle` to install the required dependencies via Homebrew.
+
+        ```bash
+        cd script/macos && brew bundle
+        ```
+      </Step>
+      <Step title="Add game data">
+        You have two options:
+
+        **Option A — original game:** Copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories from your Heroes of Might and Magic II installation into the repository root. Some subdirectories may be absent depending on your version of the game.
+
+        **Option B — demo version:** Go to the `script/demo` directory and run `download_demo_version.sh` to download the free demo.
+
+        ```bash
+        script/demo/download_demo_version.sh
+        ```
+      </Step>
+      <Step title="Build the project">
+        Run `make` from the repository root.
+
+        ```bash
+        make
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Linux">
+    <Steps>
+      <Step title="Install dependencies">
+        Go to the `script/linux` directory and run `install_sdl2_dev.sh` to install the required SDL2 development packages.
+
+        ```bash
+        script/linux/install_sdl2_dev.sh
+        ```
+      </Step>
+      <Step title="Add game data">
+        You have two options:
+
+        **Option A — original game:** Copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories from your Heroes of Might and Magic II installation into the repository root. Some subdirectories may be absent depending on your version of the game.
+
+        **Option B — demo version:** Go to the `script/demo` directory and run `download_demo_version.sh` to download the free demo.
+
+        ```bash
+        script/demo/download_demo_version.sh
+        ```
+      </Step>
+      <Step title="Build the project">
+        Run `make` from the repository root.
+
+        ```bash
+        make
+        ```
+      </Step>
+    </Steps>
+
+    <Tip>
+      You can also build on Linux with CMake. See the [CMake guide](/contributing/cmake) for details.
+    </Tip>
+  </Tab>
+
+  <Tab title="Android">
+    <Steps>
+      <Step title="Install packages">
+        Go to the `script/android` directory and run the appropriate script for your development machine:
+
+        - **Windows:** run `install_packages.bat`
+        - **macOS or Linux:** run `install_packages.sh`
+
+        ```bash
+        # macOS or Linux
+        script/android/install_packages.sh
+        ```
+
+        ```bash
+        # Windows
+        script\android\install_packages.bat
+        ```
+
+        These scripts install all packages required to build with Android Studio.
+      </Step>
+      <Step title="Open the project in Android Studio">
+        Launch Android Studio, open the project located in the `android` directory, and run the build.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="iOS">
+    <Warning>
+      You need the `DATA`, `ANIM`, `MAPS`, and `MUSIC` folders present in the repository root before building for iOS. Obtain them from an original game installation or the demo version.
+    </Warning>
+
+    <Steps>
+      <Step title="Install Xcode">
+        Download and install Xcode on your macOS device. Include the iOS SDK during installation.
+      </Step>
+      <Step title="Install packages">
+        Go to the `script/ios` directory and run `install_packages.sh` to install all required packages.
+
+        ```bash
+        script/ios/install_packages.sh
+        ```
+      </Step>
+      <Step title="Open the Xcode project">
+        Open `fheroes2.xcodeproj` located in the `iOS` folder.
+      </Step>
+      <Step title="Configure signing">
+        In the Editor area, select **fheroes2** under **Targets** (not Projects). Open the **Signing & Capabilities** tab, and under **Signing**, add your Apple ID in the **Team** field.
+      </Step>
+      <Step title="Select your device">
+        Connect your iOS device to your Mac with the appropriate cable. Select the device in Xcode's upper toolbar.
+      </Step>
+      <Step title="Build and run">
+        Click the play button or press **Command+B** to build. If prompted to download the Metal toolchain, accept it — it is required.
+
+        After the build, you will be prompted to enable developer mode on your iOS device. Follow the on-screen steps on both your Mac and iOS device. Once developer mode is enabled and your Apple ID is added, you can build and run the project.
+
+        <Note>
+          The first build will take a while. Once fheroes2 starts on your iOS device, a white screen may show for a minute or more before the game loads.
+        </Note>
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Other platforms
+
+<CardGroup cols={3}>
+  <Card title="PlayStation Vita" icon="gamepad-2" href="https://github.com/ihhub/fheroes2/blob/master/docs/README_PSV.md">
+    Full build instructions for PlayStation Vita are in `docs/README_PSV.md`.
+  </Card>
+  <Card title="Nintendo Switch" icon="gamepad-2" href="https://github.com/ihhub/fheroes2/blob/master/docs/README_switch.md">
+    Full build instructions for Nintendo Switch are in `docs/README_switch.md`.
+  </Card>
+  <Card title="Emscripten (Wasm)" icon="globe" href="https://github.com/ihhub/fheroes2/blob/master/docs/README_emscripten.md">
+    Instructions for running fheroes2 in a web browser via WebAssembly are in `docs/README_emscripten.md`.
+  </Card>
+</CardGroup>
+
+## Build with CMake
+
+If you prefer CMake over the platform-native toolchain, see the [CMake build guide](/contributing/cmake).

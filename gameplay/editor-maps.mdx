@@ -1,0 +1,230 @@
+---
+title: "Creating and Managing Maps in the fheroes2 Editor"
+description: "Step-by-step guide to creating, configuring, and saving custom fheroes2 maps: terrain, objects, castles, heroes, events, rumors, and the Sphinx."
+---
+
+This guide walks through the full workflow for building a playable map in the fheroes2 map editor — from the initial size choice through terrain painting, object placement, scenario configuration, and saving. It also covers the individual configuration dialogs for castles, heroes, events, and other special objects.
+
+## Creating or opening a map
+
+<Steps>
+  <Step title="Open the Map Editor">
+    From the fheroes2 main menu, select **Map Editor**. The editor menu displays **New Map** and **Load Map**.
+  </Step>
+  <Step title="Choose new or existing">
+    - **New Map** — opens a sub-menu with **From Scratch** and **Random**.
+      - **From Scratch** produces a blank map filled entirely with Water tiles.
+      - **Random** opens the random map generator configuration screen before generating a complete map.
+    - **Load Map** — opens the scenario selection screen listing all `.fh2m` files in your maps folder. Select a file to open it in the editor.
+  </Step>
+  <Step title="Select a map size">
+    For new maps (both scratch and random), choose one of four square sizes. Each size is measured in tiles per side:
+
+    | Option | Size |
+    |--------|------|
+    | Small | 36 × 36 |
+    | Medium | 72 × 72 |
+    | Large | 108 × 108 |
+    | Extra Large | 144 × 144 |
+  </Step>
+</Steps>
+
+<Tip>
+  Start with a small map while learning the editor. You can always create a larger map once you are comfortable with the workflow.
+</Tip>
+
+## Configuring map specifications
+
+Open the **Specs** dialog from the editor panel at any time to configure the scenario's metadata and win/loss rules. These settings are shown to players in the scenario selection screen before they start a game.
+
+### Name, description, and difficulty
+
+- **Name** — the title shown in the scenario list (up to 30 characters).
+- **Description** — a longer summary displayed in the scenario info panel.
+- **Difficulty** — sets the starting challenge rating for the scenario.
+- **Creator notes** — optional field for contact details; visible in the editor only and required for maps bundled with the engine.
+
+### Player configuration
+
+The player section lets you mark each of the six player colors as **human-playable**, **computer-only**, or unavailable. You also assign a race (Knight, Barbarian, Sorceress, Warlock, Wizard, Necromancer, or Random) to each active player.
+
+### Win and loss conditions
+
+<AccordionGroup>
+  <Accordion title="Victory conditions">
+    | Condition | Description |
+    |-----------|-------------|
+    | None (defeat everyone) | Standard: eliminate all opponents. |
+    | Capture a town | Human player must capture a specific computer-owned town. |
+    | Kill a hero | Human player must defeat a specific computer-owned hero. |
+    | Obtain an artifact | Human player must acquire a specific artifact (or any Ultimate Artifact). |
+    | One side defeats the other | Two alliances must be configured; one must eliminate the other. |
+    | Accumulate gold | Human player must amass a set amount of gold. |
+
+    For "capture a town" and "kill a hero" conditions you select the target from a list of eligible towns or heroes on the map. For artifact conditions you pick the specific artifact or leave it set to any Ultimate Artifact. Certain conditions also offer **Allow standard victory conditions** and **Allow this condition also for AI** checkboxes.
+  </Accordion>
+  <Accordion title="Loss conditions">
+    | Condition | Description |
+    |-----------|-------------|
+    | None (lose everything) | Standard: lose all towns and heroes. |
+    | Lose a specific town | Defeat if a particular town is lost. |
+    | Lose a specific hero | Defeat if a particular hero is eliminated. |
+    | Run out of time | Defeat if the player does not win before a deadline. |
+  </Accordion>
+</AccordionGroup>
+
+### Alliances
+
+When using the "one side defeats the other" victory condition, the specifications dialog shows an alliance editor. Assign each player color to one of two opposing alliances by toggling the color checkboxes.
+
+## Painting terrain
+
+Select the **Terrain** instrument in the editor panel. Choose one of the nine terrain types:
+
+- Water, Grass, Snow, Swamp, Lava, Desert, Dirt, Wasteland, Beach
+
+Then select a brush size — **Small**, **Medium**, **Large**, or **Area** — and click or click-and-drag on the map canvas to paint tiles. When you change terrain under existing objects the editor validates placement and removes any objects that are incompatible with the new terrain.
+
+<Warning>
+  Painting terrain under existing objects may erase them if they are not compatible with the new terrain type. Check object placement after making large terrain changes.
+</Warning>
+
+## Placing landscape objects
+
+Select the **Landscape Objects** instrument to access decorative scenery: Mountains, Rocks, Trees, Water Objects, and miscellaneous landscape pieces. Choose a category and then pick a specific variant from the palette. The selected object attaches to your cursor; click a tile to place it.
+
+## Placing adventure objects
+
+Select the **Adventure Objects** instrument to place interactive map content:
+
+- **Artifacts** — pickable artifact items, including random artifact objects. Random Artifact objects let you choose which specific artifacts may appear on that tile.
+- **Dwellings** — creature recruitment buildings.
+- **Mines** — resource-producing mines. Mines can have an owner color set.
+- **Power-ups** — stat-boosting map objects.
+- **Treasures** — resource piles and chests.
+- **Water adventure objects** — sea-specific adventures.
+- **Miscellaneous** — signs, Sphinxes, events, and other special objects.
+
+## Placing and configuring castles
+
+<Steps>
+  <Step title="Select the Towns brush">
+    Choose the **Kingdom Objects** instrument, then select **Towns** from the sub-palette. Pick a race and color from the object list. A brand new map starts filled with Water, so make sure you have painted appropriate land terrain before placing a castle.
+  </Step>
+  <Step title="Place the castle">
+    Click the map to place the castle. Towns occupy a 5×5 tile area centered on the placement point. Ensure there is sufficient clear space.
+  </Step>
+  <Step title="Open the castle details dialog">
+    Right-click the placed castle to open its configuration dialog. The dialog lets you set:
+
+    - **Custom name** — leave empty for a random name at game start.
+    - **Defending army** — up to five slots; set monster type and count for each slot.
+    - **Custom buildings** — toggle whether buildings are customized, then mark each building as built or banned.
+    - **Mage Guild spells** — assign specific spells that must appear at each guild level, and ban spells that must not appear.
+    - **Available monsters** — set how many creatures of each dwelling type are available to hire at game start.
+  </Step>
+</Steps>
+
+<Note>
+  If the castle name is left empty, the engine generates a random name when the scenario is played.
+</Note>
+
+## Placing and configuring heroes
+
+<Steps>
+  <Step title="Select the Heroes brush">
+    Choose the **Kingdom Objects** instrument, then select **Heroes**. Pick the hero type and player color from the palette.
+  </Step>
+  <Step title="Place the hero">
+    Click an accessible land tile to place the hero.
+  </Step>
+  <Step title="Open the hero details dialog">
+    Right-click the placed hero to configure starting stats:
+
+    - **Custom name** and **custom portrait** — leave blank/zero for defaults.
+    - **Army** — up to five slots with monster type and count.
+    - **Artifacts** — up to 14 artifact slots.
+    - **Spell book** — choose which spells the hero starts with.
+    - **Secondary skills** — assign up to 8 secondary skills and their levels.
+    - **Primary skills** — set custom Attack, Defense, Knowledge, and Spell Power instead of race defaults.
+    - **Level or experience** — set a custom starting level or experience value.
+    - **Magic points** — set starting mana.
+    - **Patrol** — for AI heroes, enable patrol mode and set a patrol radius.
+  </Step>
+</Steps>
+
+## Placing monsters
+
+Select the **Monsters** instrument to place neutral monster stacks. Pick the monster type from the palette (or choose a Random Monster object, which lets you specify which monster variants may appear), set the count, and click a tile.
+
+## Drawing roads and streams
+
+- **Road** instrument — click or drag to draw road segments. The engine automatically generates appropriate road graphics for intersections, including diagonal crossings.
+- **Stream** instrument — click or drag to draw streams across the terrain.
+
+## Adding tile events
+
+Tile events are adventure-map objects that fire when a hero steps on them. Place them via **Adventure Objects → Miscellaneous**, then right-click to configure:
+
+- **Message** — text shown to the player.
+- **Rewards** — resources, an artifact, primary skill bonuses, experience, a secondary skill, or a monster encounter.
+- **Player targets** — choose which human and computer player colors trigger the event.
+- **Recurring** — whether the event fires once or every time a qualifying hero steps on the tile.
+
+## Adding daily events and rumors
+
+Daily events and rumors are set in the **Map Specifications** dialog (not placed on the map canvas).
+
+### Daily events
+
+Daily events broadcast a message and optionally award resources to specified players on a given day. Each event has:
+
+- **Message** — displayed in the Adventure Log on the event day.
+- **First occurrence day** — the day the event first fires.
+- **Repeat period** — how many days between recurrences (0 means no repetition).
+- **Resources** — an optional resource grant given to the targeted players.
+- **Player targets** — which human and computer player colors receive the event.
+
+### Rumors
+
+Rumors are short text strings surfaced randomly in Taverns during gameplay. Open the rumors window from the specs dialog to add, edit, or delete rumor entries. Up to 999 characters are supported per rumor.
+
+## Configuring a Sphinx
+
+Place a Sphinx via **Adventure Objects → Miscellaneous**, then right-click it to open the Sphinx dialog:
+
+- **Riddle** — the question presented to the player.
+- **Answers** — one or more accepted answer strings (case-insensitive matching).
+- **Reward** — an artifact and/or resources awarded for a correct answer.
+
+## Secondary skill and spell selection
+
+Several dialogs in the editor — such as Witch's Hut configuration and Mage Guild spell setup — use shared selection windows:
+
+- **Secondary skill selection** — choose skills at a specified level from a filterable list. A toggle-all button is available.
+- **Spell selection** — choose spells by level with support for single or multi-level selection. You can also ban spells from appearing.
+
+## Saving a map
+
+Click the **File** button in the editor panel to open the file dialog, then choose **Save Map**. The save dialog asks for:
+
+- **File name** — the filename on disk (without extension; `.fh2m` is appended automatically).
+- **Map name** — the title shown in the scenario selection screen (can differ from the file name, up to 30 characters).
+
+The map is saved in the fheroes2 native map format. Saved maps appear immediately in the **Load Map** list in both the editor and the main game.
+
+<Tip>
+  Save frequently while editing. The undo history (up to 999 actions) is per-session only and is not persisted with the file.
+</Tip>
+
+## Deleting maps
+
+Maps can be deleted directly from the scenario selection screen that appears when you choose **Load Map**. Select the map and use the delete option to remove it permanently.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Map editor overview" icon="map" href="/gameplay/editor-overview">
+    Overview of all editor capabilities, bundled maps, and how to access the editor.
+  </Card>
+</CardGroup>

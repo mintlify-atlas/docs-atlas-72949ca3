@@ -1,0 +1,103 @@
+---
+title: "Contributing Pixel Art and Graphical Assets to fheroes2"
+description: "A guide for pixel artists on extracting original assets, creating new artwork, and submitting contributions to fheroes2 via pull request."
+---
+
+fheroes2 draws its graphics from the original Heroes of Might and Magic II data files, but the project also ships its own new and improved assets alongside them. These new assets live in `files/data/resurrection.h2d`. Artists can contribute by improving existing sprites or creating entirely new ones — this guide explains the tools, the workflow, and where to find tasks that need attention. The guide applies to Linux, macOS, and Windows users.
+
+## Where original assets are stored
+
+The original game stores all graphical assets inside two AGG archive files located in the `DATA` folder of a Heroes of Might and Magic II installation:
+
+- `HEROES2.agg` — base game assets
+- `HEROES2X.agg` — expansion assets (present only if The Price of Loyalty is installed)
+
+New assets added by the fheroes2 project itself are stored in `files/data/resurrection.h2d`.
+
+## Tools
+
+fheroes2 provides a set of precompiled tools for extracting and converting graphical assets. The source code for all tools is available in the project repository.
+
+### Download the tools
+
+Download the precompiled tools for your operating system:
+
+| Platform | Download |
+|---|---|
+| Windows 32-bit | [fheroes2_tools_windows_x86_SDL2.zip](https://github.com/ihhub/fheroes2/releases/download/fheroes2-windows-x86-SDL2/fheroes2_tools_windows_x86_SDL2.zip) |
+| Windows 64-bit | [fheroes2_tools_windows_x64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/download/fheroes2-windows-x64-SDL2/fheroes2_tools_windows_x64_SDL2.zip) |
+| macOS | [fheroes2_tools_macos_x86-64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/download/fheroes2-osx-sdl2_dev/fheroes2_tools_macos_x86-64_SDL2.zip) |
+| Linux Ubuntu 64-bit | [fheroes2_tools_ubuntu_x86-64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/download/fheroes2-linux-sdl2_dev/fheroes2_tools_ubuntu_x86-64_SDL2.zip) |
+| Linux Ubuntu ARM 64-bit | [fheroes2_tools_ubuntu_arm64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/download/fheroes2-linux-arm-sdl2_dev/fheroes2_tools_ubuntu_arm64_SDL2.zip) |
+
+### Tool descriptions
+
+| Tool | Description |
+|---|---|
+| `extractor` | Extracts all contents from the AGG files, including ICN files that hold the graphical assets. |
+| `icn2img` | Converts graphical assets stored inside ICN files into PNG or BMP images. |
+| `pal2img` | Generates a PNG or BMP image from the `KB.PAL` palette file, displayed as 16×16 tiles of 16 pixels each. Cycling-animation colors are marked with a black area in the top-left corner of their tile. |
+
+## Extracting images
+
+Place `HEROES2.agg` (and optionally `HEROES2X.agg`) in the same folder as the extracted tools, then run the `extract_agg` script. This produces the following output in that folder:
+
+```
+agg/
+  HEROES2/       # raw, untouched contents of HEROES2.agg
+  HEROES2X/      # (if present) raw contents of HEROES2X.agg
+icn/
+  HEROES2/
+    apanel/      # PNG images from apanel.icn
+    ...          # one subfolder per ICN file
+  HEROES2X/      # (if present)
+palette.png      # full game palette
+```
+
+The `icn/` folder is the most relevant one for graphical work — it contains all the converted PNG images, organized by their source ICN file.
+
+## The color palette
+
+The game uses `KB.PAL` as its color palette. You can visualize the full palette by running the `pal2img` tool. Some palette entries are reserved for cycling animations and will produce unexpected results if used in static artwork. Avoid the following color indices unless your asset specifically requires animation:
+
+- 214, 215, 216, 217
+- 218, 219, 220, 221
+- 231, 232, 233, 234, 235
+- 238, 239, 240, 241
+
+## Where help is needed
+
+The fheroes2 team maintains two GitHub issue labels for artist tasks:
+
+- [**original assets**](https://github.com/ihhub/fheroes2/issues?q=is%3Aopen+is%3Aissue+label%3A"original+assets") — issues that require changes to art from the original game
+- [**new assets**](https://github.com/ihhub/fheroes2/issues?q=is%3Aopen+is%3Aissue+label%3A"new+assets") — tasks for creating brand-new artwork
+
+<Warning>
+  Before starting work on any issue, check whether someone is already assigned to it. Also post a comment to let the team know you intend to work on it. This prevents duplicate effort.
+</Warning>
+
+## Work process
+
+<Steps>
+  <Step title="Choose an issue and notify the team">
+    Pick an open issue from the [original assets](https://github.com/ihhub/fheroes2/issues?q=is%3Aopen+is%3Aissue+label%3A"original+assets") or [new assets](https://github.com/ihhub/fheroes2/issues?q=is%3Aopen+is%3Aissue+label%3A"new+assets") labels. Comment on the issue to let the team know you are working on it and to avoid duplicate work.
+  </Step>
+  <Step title="Present a prototype">
+    Create a prototype or a complete-enough version of the asset in your opinion. Share it in the issue or a related discussion for early feedback.
+  </Step>
+  <Step title="Receive team feedback">
+    One or two members of the team will review your work and leave feedback.
+  </Step>
+  <Step title="Address the feedback">
+    Update your asset based on the feedback received.
+  </Step>
+  <Step title="Repeat review and revision">
+    Steps 3 and 4 are repeated until the initial reviewers approve the work.
+  </Step>
+  <Step title="Expand the review team">
+    The review is broadened to 3–4 team members, and the feedback and revision cycle (steps 3–4) repeats until everyone approves.
+  </Step>
+  <Step title="Integration">
+    Once the asset has full approval, the team adds it to the `resurrection.h2d` data file and updates the fheroes2 source code to use it.
+  </Step>
+</Steps>

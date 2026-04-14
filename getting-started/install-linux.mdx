@@ -1,0 +1,202 @@
+---
+title: "Install fheroes2 on Linux: Flatpak, Packages, and ZIP"
+description: "How to install fheroes2 on Linux via Flatpak, Debian/Ubuntu, Arch AUR, Gentoo, Homebrew, or a prebuilt ZIP archive for x86-64 and ARM64."
+---
+
+fheroes2 supports a wide range of Linux distributions and installation methods. Flatpak is the recommended option because it works on any distribution and handles all dependencies automatically. Native packages are also available for Gentoo, Arch Linux (AUR), Debian, and Ubuntu. If no package is available for your distribution, you can use the prebuilt ZIP archive for x86-64 or ARM64.
+
+<Info>
+  fheroes2 requires data files from the original **Heroes of Might and Magic II**. Purchase the game on [GOG](https://www.gog.com) or [Ubisoft Store](https://store.ubi.com), or use the bundled demo download script.
+</Info>
+
+## Flatpak (recommended)
+
+Flatpak works on any Linux distribution that has Flatpak and Flathub configured.
+
+<Steps>
+  <Step title="Install fheroes2">
+    ```sh
+    flatpak install flathub io.github.ihhub.Fheroes2
+    ```
+
+    Alternatively, use a graphical application manager such as Discover (also available on Steam Deck).
+  </Step>
+  <Step title="Launch the game">
+    Launch from your application menu, or run it from the terminal:
+
+    ```sh
+    flatpak run io.github.ihhub.Fheroes2
+    ```
+  </Step>
+  <Step title="Add game resources">
+    On first launch, fheroes2 will guide you through one of three options:
+
+    1. **Install GOG version (recommended)** — provide the HoMM2 installer `.exe` downloaded from GOG; resources are extracted automatically.
+    2. **Manual install** — copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories from your original game or demo into `~/.var/app/io.github.ihhub.Fheroes2/data/fheroes2`. The destination folder opens automatically when you select this option.
+    3. **Install demo** — download the free demo version.
+  </Step>
+</Steps>
+
+## Distribution-specific packages
+
+<AccordionGroup>
+  <Accordion title="Gentoo">
+    fheroes2 is available from the Gentoo package manager. Choose the option that matches your copy of the game.
+
+    **GOG version**
+
+    Add the following line to `/etc/portage/package.license`:
+
+    ```text
+    games-strategy/homm2-gold-gog GOG-EULA
+    ```
+
+    Then install the package:
+
+    ```sh
+    sudo emerge -av games-strategy/homm2-gold-gog
+    ```
+
+    The package will ask you to place the GOG `.exe` installer (and optionally a ZIP file with FLAC music) in your distfiles directory, then extract everything and pull `games-engines/fheroes2` as a dependency. The `flac` USE flag controls whether the game uses FLAC or OGG music.
+
+    **Demo version**
+
+    Add the following line to `/etc/portage/package.license`:
+
+    ```text
+    games-strategy/homm2-demo HoMM2-Demo
+    ```
+
+    Then install:
+
+    ```sh
+    sudo emerge -av games-strategy/homm2-demo
+    ```
+
+    **Original CD installation**
+
+    If you installed the game from an original CD, run:
+
+    ```sh
+    sudo emerge -av games-engines/fheroes2
+    /usr/share/fheroes2/extract_homm2_resources.sh
+    ```
+
+    Run the second command **without** `sudo`. It will ask where your game data files are located.
+  </Accordion>
+
+  <Accordion title="Homebrew on Linux">
+    If you have [Homebrew](https://brew.sh/) installed on Linux, run:
+
+    ```sh
+    brew install fheroes2
+    ```
+
+    Then add game resources:
+
+    - **Own the original game** — copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories from your original game into `$XDG_DATA_HOME/fheroes2` (usually `~/.local/share/fheroes2`).
+    - **No original game** — run `/usr/share/fheroes2/download_demo_version.sh` to download the free demo.
+  </Accordion>
+
+  <Accordion title="Arch Linux (AUR)">
+    fheroes2 is available from the [Arch User Repository](https://aur.archlinux.org/packages/fheroes2).
+
+    **Using an AUR helper (e.g. yay)**
+
+    ```sh
+    yay -S aur/fheroes2
+    ```
+
+    **Using the official AUR guide**
+
+    ```sh
+    git clone https://aur.archlinux.org/fheroes2.git
+    cd fheroes2
+    makepkg -si
+    ```
+  </Accordion>
+
+  <Accordion title="Debian and Ubuntu">
+    fheroes2 is available from the `contrib` repositories on Debian 13+ and Ubuntu 24.04+:
+
+    ```sh
+    apt install fheroes2
+    ```
+
+    <Note>
+      Debian and Ubuntu packages may not provide the latest version of fheroes2 due to their release cycles. Use Flatpak or the ZIP archive for the most recent release.
+    </Note>
+
+    **Adding game resources with game-data-packager**
+
+    You can install resources to the system-wide path (`/usr/share/games/fheroes2`) using `game-data-packager` (version 70 or later):
+
+    ```sh
+    game-data-packager heroes2 <path_to_installed_original_game>
+    apt install ./homm2-data_<version>_all.deb
+    ```
+
+    Run `game-data-packager heroes2 --help` for more information. You can also install resources to per-user paths — see `man fheroes2` for details.
+  </Accordion>
+</AccordionGroup>
+
+## Linux ZIP archive
+
+Use the ZIP archive on any distribution when no native package is available.
+
+<Tabs>
+  <Tab title="x86-64">
+    <Steps>
+      <Step title="Download the archive">
+        Download [fheroes2_ubuntu_x86-64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_ubuntu_x86-64_SDL2.zip) from the latest release.
+      </Step>
+      <Step title="Extract the archive">
+        Extract the ZIP to a directory of your choice.
+      </Step>
+      <Step title="Install SDL2 dependencies">
+        Install the SDL libraries for your distribution:
+
+        | Distribution | Command |
+        | --- | --- |
+        | Debian-based | Run `install_sdl2.sh` from the `script/linux` subdirectory |
+        | Pacman-based (Arch Linux) | `sudo pacman -S sdl2 sdl2_mixer` |
+        | Red Hat-based (Fedora, RHEL) | `sudo dnf install SDL*` or `sudo yum install SDL*` |
+        | openSUSE | Use `SDL_mixer.ymp` from `script/linux` for One-Click-Install |
+        | Gentoo | `emerge --ask media-libs/sdl2-mixer` |
+      </Step>
+      <Step title="Add game resources">
+        - **Own the original game** — run `extract_homm2_resources.sh`. You will be prompted for the location of your HoMM2 installation.
+        - **No original game** — run `download_demo_version.sh` to download the free demo.
+
+        Alternatively, copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories from your original game into the fheroes2 directory.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="ARM64">
+    <Steps>
+      <Step title="Download the archive">
+        Download [fheroes2_ubuntu_arm64_SDL2.zip](https://github.com/ihhub/fheroes2/releases/latest/download/fheroes2_ubuntu_arm64_SDL2.zip) from the latest release.
+      </Step>
+      <Step title="Extract the archive">
+        Extract the ZIP to a directory of your choice.
+      </Step>
+      <Step title="Install SDL2 dependencies">
+        Install the SDL libraries for your distribution:
+
+        | Distribution | Command |
+        | --- | --- |
+        | Debian-based | Run `install_sdl2.sh` from the `script/linux` subdirectory |
+        | Pacman-based (Arch Linux) | `sudo pacman -S sdl2 sdl2_mixer` |
+        | Red Hat-based (Fedora, RHEL) | `sudo dnf install SDL*` or `sudo yum install SDL*` |
+        | openSUSE | Use `SDL_mixer.ymp` from `script/linux` for One-Click-Install |
+        | Gentoo | `emerge --ask media-libs/sdl2-mixer` |
+      </Step>
+      <Step title="Add game resources">
+        - **Own the original game** — run `extract_homm2_resources.sh`. You will be prompted for the location of your HoMM2 installation.
+        - **No original game** — run `download_demo_version.sh` to download the free demo.
+
+        Alternatively, copy the `ANIM`, `DATA`, `MAPS`, and `MUSIC` subdirectories from your original game into the fheroes2 directory.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>

@@ -1,0 +1,68 @@
+---
+title: "System and game asset requirements to run fheroes2"
+description: "What you need before installing fheroes2: supported operating systems and how to obtain the required Heroes of Might and Magic II game assets."
+---
+
+Before you can play fheroes2, you need two things: a supported operating system and the resource files from **Heroes of Might and Magic II**. fheroes2 is the engine — it does not include the original game's art, maps, or sounds. This page explains where to get what you need.
+
+## Game assets
+
+fheroes2 requires resource files from Heroes of Might and Magic II. You can use either the full commercial game or the free demo version.
+
+<Warning>
+  fheroes2 does not support or condone piracy. All rights to the original game and its resources belong to Ubisoft. Only use legally obtained copies of the game.
+</Warning>
+
+<Tabs>
+  <Tab title="Full game">
+    The full version of Heroes of Might and Magic II gives you access to all campaigns, maps, and content. You can purchase it from either of these stores:
+
+    - **GOG** — DRM-free download available at [gog.com](https://www.gog.com)
+    - **Ubisoft Store** — available at [store.ubi.com](https://store.ubi.com)
+
+    Once you have the game installed, the fheroes2 installer or the bundled `extract_homm2_resources` script will copy the required resource directories (`ANIM`, `DATA`, `MAPS`, and `MUSIC`) into the fheroes2 installation directory automatically.
+
+    <Note>
+      Not all versions of the original game include every resource directory. Some versions may be missing `ANIM` or `MUSIC` — this is expected and fheroes2 will still work.
+    </Note>
+  </Tab>
+  <Tab title="Free demo">
+    If you do not own the full game, you can use the free demo version of Heroes of Might and Magic II (available in English only). Each fheroes2 release includes a script that downloads and installs the demo automatically.
+
+    | Platform | Script |
+    | --- | --- |
+    | Windows (installer) | Select the demo option during installation, or use the Start menu shortcut after installing |
+    | Windows (ZIP) | Run `download_demo_version.bat` from the extracted archive |
+    | macOS / Linux (package manager) | Run `fheroes2-install-demo` |
+    | macOS / Linux (ZIP) | Run `script/demo/download_demo_version.sh` from the extracted archive |
+    | Linux (Flatpak) | Select "Install demo" on first launch |
+
+    <Note>
+      The demo version only includes a subset of maps and content. For the full game experience, purchase the complete edition from GOG or the Ubisoft Store.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Supported operating systems
+
+fheroes2 provides precompiled release binaries for the following platforms:
+
+| Platform | Notes |
+| --- | --- |
+| Windows x64 (64-bit) | Installer and ZIP archive available |
+| Windows x86 (32-bit) | Installer and ZIP archive available |
+| macOS | Available via Homebrew, MacPorts, or ZIP archive (x86-64) |
+| Linux x86-64 | Available via Flatpak, Debian/Ubuntu, Arch AUR, Gentoo, Homebrew, or ZIP archive |
+| Linux ARM64 | ZIP archive available |
+| Android | Available on Google Play |
+| iOS | Available — see platform-specific instructions |
+| PlayStation Vita | Requires custom firmware |
+| Nintendo Switch | Requires custom firmware |
+
+<Note>
+  For Apple Silicon (M1/M2) Macs, use Homebrew or MacPorts instead of the ZIP archive. Only x86-64 binaries are provided in the ZIP archive for macOS.
+</Note>
+
+## License
+
+fheroes2 is licensed under the [GNU General Public License v2.0](https://github.com/ihhub/fheroes2/blob/master/LICENSE). The engine itself is free and open source. The original game assets are **not** covered by this license — you are responsible for obtaining them legally.

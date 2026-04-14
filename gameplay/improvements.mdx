@@ -1,0 +1,172 @@
+---
+title: "fheroes2 Enhancements Over the Original Game"
+description: "Discover the UI, graphics, battle, campaign, and AI improvements fheroes2 adds over the original Heroes of Might and Magic II engine."
+---
+
+fheroes2 is not a patch or a mod — it is a complete recreation of the Heroes of Might and Magic II engine written from scratch. That means the team has been able to fix longstanding bugs, extend the UI, improve AI logic, and add quality-of-life features that were never possible through modding. The improvements below cover the most visible changes you will notice during play.
+
+## Graphics and display
+
+<AccordionGroup>
+  <Accordion title="High-resolution support">
+    The original game was locked to 640×480. fheroes2 lets you select any resolution your display supports from the settings dialog, making the game legible on modern monitors and high-DPI screens.
+  </Accordion>
+  <Accordion title="Size-adaptive buttons and scrollbars">
+    Buttons and scrollbars resize to fit the selected language and resolution. Some translations require wider buttons to display text correctly; fheroes2 handles this automatically. Scrollbars scale with the list they control rather than being a fixed size.
+  </Accordion>
+  <Accordion title="Evil interface type support">
+    Many dialogs that were only rendered in the "good" (brown) style in the original game now fully support the "evil" interface theme, keeping the visual style consistent when you switch interface types.
+  </Accordion>
+  <Accordion title="Sprite and rendering fixes">
+    Several visual bugs from the original are corrected: cavalry sprites render with correct colors, castle flags match the player's color in Knight and Wizard towns, a missing flag overlay in the Knight castle is fixed, and rendering errors in Barbarian and Sorceress town screens are resolved. Missing building parts (farm in Knight town, Captain's Quarters in Barbarian, Sorceress, and Necromancer towns, the Phoenix Red Tower) have been restored.
+  </Accordion>
+  <Accordion title="Centered mage guild images">
+    Guild spell windows in all town types now center the guild artwork, correcting the misaligned display from the original game.
+  </Accordion>
+</AccordionGroup>
+
+## Battle improvements
+
+<AccordionGroup>
+  <Accordion title="Movement hex highlighting">
+    When you select a creature on the battle grid, the hexes it can reach are individually highlighted. Large (two-hex) creatures show a double-hex highlight so you can see exactly which cells they will occupy. Breath and area attacks also display the affected hexes before you confirm the action.
+  </Accordion>
+  <Accordion title="Army turn order display">
+    A panel shows the order in which all creatures on both sides will act during the current round. You can toggle its position during combat and use it to plan ahead — for example deciding which enemy to focus before it takes its turn.
+  </Accordion>
+  <Accordion title="Damage pop-up windows">
+    After an attack or a damage spell resolves, a pop-up window shows the exact damage dealt. This applies to both melee attacks and spells, so you always know how effective your actions were.
+  </Accordion>
+  <Accordion title="Spell duration and description in creature info">
+    During battle, the creature info window shows how many rounds each active spell on that creature will last, and includes the spell description. In the original game this information was not accessible mid-battle.
+  </Accordion>
+  <Accordion title="Instant battle and quick-finish options">
+    An instant battle switch lets the AI resolve an entire combat automatically without animation. If you start a battle manually, you can press **Q** to hand control to the AI and finish it quickly at any point. A confirmation dialog appears before auto-battle starts or when you interrupt it.
+  </Accordion>
+  <Accordion title="Restart battle">
+    A restart button on the battle screen lets you replay a manual battle from the beginning without leaving the combat screen, so you can try different tactics without reloading a save.
+  </Accordion>
+  <Accordion title="Liches shooting area highlight">
+    When a Lich targets an enemy, the area of effect for its ranged attack is highlighted on the battlefield so you can see which of your own units may take splash damage.
+  </Accordion>
+  <Accordion title="Mass spell area indicator">
+    Area-of-effect spells show their coverage zone before you cast them, letting you confirm the spell will hit the intended targets.
+  </Accordion>
+  <Accordion title="Grayed-out unavailable spells">
+    Spells that cannot currently be cast (for example, resurrection when no friendly units are dead) are visually grayed out in the spell book so you can quickly identify usable options.
+  </Accordion>
+  <Accordion title="Hero info accessible during battle">
+    A button in the battle UI opens your hero's info window mid-combat, letting you review their skills and secondary abilities without leaving the battlefield.
+  </Accordion>
+  <Accordion title="New icon for Medusa petrification">
+    Medusa's petrification ability has a dedicated status icon so it is clearly visible on affected creatures, distinguishing it from other debuffs.
+  </Accordion>
+  <Accordion title="Battle only mode">
+    A standalone battle-only mode lets you configure two armies and run a combat without playing a full scenario. You can select the terrain type for the battlefield and switch it with the mouse wheel.
+  </Accordion>
+</AccordionGroup>
+
+## Army and creature management
+
+<AccordionGroup>
+  <Accordion title="Ctrl/Alt/Shift army rearrangement shortcuts">
+    Hold **Shift** while dragging to split a stack in half and move the half to a new slot. Hold **Ctrl** to move a single unit to another slot. Hold **Alt** to join two stacks together. These shortcuts work in the hero screen, castle screen, and hero meeting dialog.
+  </Accordion>
+  <Accordion title="Split-stack buttons">
+    Dedicated buttons let you split a creature stack into several equal-sized sub-stacks in one click, which is useful for spreading units across army slots.
+  </Accordion>
+  <Accordion title="Creature upgrade selection">
+    When multiple upgrade paths are available for a creature, upgrade selection buttons appear so you can choose which tier to build towards.
+  </Accordion>
+  <Accordion title="Larger creature stack counters">
+    Stack size counters are larger and easier to read on the adventure map and in battle, where the original counters were small enough to obscure.
+  </Accordion>
+  <Accordion title="Special characteristics in creature info">
+    The creature info window lists every special ability the creature has — for example immunities, special attacks, or passive bonuses — in a dedicated characteristics section.
+  </Accordion>
+  <Accordion title="Move army and artifact buttons">
+    Arrows for moving armies and artifacts between heroes at a meeting dialog are now functional, interactive buttons rather than static parts of the background image.
+  </Accordion>
+  <Accordion title="Glowing selection highlight">
+    The selected creature or artifact in a hero meeting dialog has a glowing frame, making it clear which item is currently active before you transfer it.
+  </Accordion>
+</AccordionGroup>
+
+## Castle and town improvements
+
+<AccordionGroup>
+  <Accordion title="Recruit troops in the Well">
+    The Well building in a castle now lets you hire all available creatures from all dwellings in one dialog. In the original game you had to click each dwelling individually on the castle screen.
+  </Accordion>
+  <Accordion title="Kingdom income window">
+    A kingdom income window is accessible from the castle screen, showing your current daily income across all resource types without having to open a separate dialog.
+  </Accordion>
+  <Accordion title="Switch town buttons">
+    Navigation buttons on the castle construction screen let you cycle through your towns without returning to the adventure map.
+  </Accordion>
+  <Accordion title="Town Portal spell UI">
+    The Town Portal spell has a new UI that clearly presents available destination towns so you can select one quickly during combat.
+  </Accordion>
+  <Accordion title="Month, week, and day in castle screen">
+    The castle construction screen displays the current date (month, week, and day) so you can plan construction queues without opening a separate status panel.
+  </Accordion>
+</AccordionGroup>
+
+## Adventure map improvements
+
+<AccordionGroup>
+  <Accordion title="Visited object indicators">
+    Many adventure map objects (shrines, witch huts, and others) show a visited status indicator after your hero has been there. Visited Shrines and Witch Huts display which specific spell or skill they contain, so you can plan routes for other heroes.
+  </Accordion>
+  <Accordion title="Extended movement day counters">
+    The cursor shows the number of days it will take a hero to reach a destination. In the original game this counter was capped at 4 days. fheroes2 removes that cap and shows the accurate travel time.
+  </Accordion>
+  <Accordion title="Map type icon">
+    The scenario selection screen shows an icon indicating whether a map requires the base game or the Price of Loyalty expansion, and also displays the map type explicitly since icons alone can be hard to distinguish.
+  </Accordion>
+  <Accordion title="New button for hero info in multiple dialogs">
+    A hero info button appears in several game dialogs, giving quick access to a hero's full statistics and skill list without navigating away from the current screen.
+  </Accordion>
+  <Accordion title="Extended spell info in the spell book">
+    The spell book shows additional information for each spell — including mana cost, duration, and description — so you can make informed casting decisions from the adventure map as well as in battle.
+  </Accordion>
+  <Accordion title="Spell book shadow">
+    The spell book renders with a drop shadow on both the adventure map and battle screens, improving its visual separation from the background.
+  </Accordion>
+</AccordionGroup>
+
+## Save file improvements
+
+<AccordionGroup>
+  <Accordion title="Rich save file information">
+    The save file browser shows the map name, game progress in days, and the file's location in the operating system for each entry, letting you identify saves without loading them.
+  </Accordion>
+  <Accordion title="Extended save file list">
+    The save list shows the date and time each file was last overwritten. You can delete saves directly from the list and scroll through long lists with the mouse wheel.
+  </Accordion>
+</AccordionGroup>
+
+## Campaign improvements
+
+<AccordionGroup>
+  <Accordion title="Difficulty selection">
+    You can choose a difficulty level before starting a campaign. The selected difficulty affects your standing in the High Scores table.
+  </Accordion>
+  <Accordion title="Reward and bonus info">
+    Right-clicking a campaign reward or bonus shows a detailed info window explaining exactly what you will receive. In the original game reward icons had no tooltip or description.
+  </Accordion>
+</AccordionGroup>
+
+## Configuration and language
+
+<AccordionGroup>
+  <Accordion title="Configuration dialog">
+    A dedicated settings dialog provides access to graphics options (including resolution and screen scaling type), gameplay options, and interface type — all in one place rather than scattered across menus.
+  </Accordion>
+  <Accordion title="Multiple language support">
+    Language selection is available regardless of which version of the original game you own. Text and audio assets remain in the original language, but the fheroes2 UI can be shown in any supported language.
+  </Accordion>
+  <Accordion title="Hot keys list and remapping">
+    An in-game hot keys list shows every configurable shortcut and its current assignment. You can reassign any hotkey directly from this screen. See [Keyboard shortcuts and hotkeys](/gameplay/hotkeys) for a full reference.
+  </Accordion>
+</AccordionGroup>
